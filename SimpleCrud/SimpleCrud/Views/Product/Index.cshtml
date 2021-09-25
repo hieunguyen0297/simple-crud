@@ -36,10 +36,10 @@
             <td>
                 @Html.DisplayFor(modelItem => item.Description)
             </td>
-            <td class="">
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+            <td >
+                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }, new { @style= "color:#d9ca48" }) |
+                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }, new { @style= "color: #03b1fc" }) |
+                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @style="color: red"})
             </td>
         </tr>
 }ss
