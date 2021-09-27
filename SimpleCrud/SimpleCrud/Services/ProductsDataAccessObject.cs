@@ -17,7 +17,7 @@ namespace SimpleCrud.Services
             //Start off as an empty list
             List<ProductModel> products = new List<ProductModel>();
 
-            //Make SQL statement and connection to get data from database
+            //Make SQL statement
 
             string sqlStatement = "Select * from Products";
 
@@ -45,6 +45,52 @@ namespace SimpleCrud.Services
             }
 
             return products;
+        }
+
+
+
+
+
+
+        //Search products by Name
+        public List<ProductModel> SearchProductByName(string searchTerm)
+        {
+            //Found products will be store here for return later
+            List<ProductModel> products = new List<ProductModel>();
+            
+           
+            //Make SQL statement
+            string sqlStatement = "select * from Products where product_name like @Name";
+
+            //Make a connection to get data from database
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                //Make command 
+                SqlCommand command = new SqlCommand(sqlStatement, connection);
+                
+                //The @Name is corresponding to @Name in the sql statement 
+                command.Parameters.AddWithValue("@Name", '%' + searchTerm + '%');
+
+                try
+                {
+                    connection.Open();
+
+                    SqlDataReader reader = command.ExecuteReader();
+
+                    while(reader.Read())
+                    {
+                        products.Add(new ProductModel { Id = (int)reader[0], Name = (string)reader[1], Price = (decimal)reader[2], Description = (string)reader[3] });
+                    }
+
+                }catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+            }
+
+            return products;
+
         }
     }
 }
