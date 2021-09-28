@@ -3,45 +3,24 @@
 <p>
     <a asp-action="Create" class="text-light">Create New</a>
 </p>
-<table class="table">
-    <thead>
-        <tr class="text-warning">
-            <th>
-                @Html.DisplayNameFor(model => model.Id)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Name)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Price)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.Description)
-            </th>
-            <th></th>
-        </tr>
-    </thead>
-    <tbody>
-@foreach (var item in Model) {
-        <tr class="text-white ">
-            <td>
-                @Html.DisplayFor(modelItem => item.Id)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Name)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Price)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Description)
-            </td>
-            <td >
-                @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }, new { @style= "color:#d9ca48" }) |
-                @Html.ActionLink("Details", "Details", new { /* id=item.PrimaryKey */ }, new { @style= "color: #03b1fc" }) |
-                @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ }, new { @style="color: red"})
-            </td>
-        </tr>
-}ss
-    </tbody>
-</table>
+
+<div class="container d-flex flex-wrap">
+    @foreach(var item in Model)
+    {
+        var fullName = item.Name;
+        var firstWord = fullName.IndexOf(" ") > 0 ? fullName.Substring(0, fullName.IndexOf(" ")) : fullName;
+
+        //get substring of Description
+    <div class="card m-3 border-0 bg-light" style="width: 18rem;">
+        <img class="card-img-top" src="https://loremflickr.com/320/250/@firstWord?lock=@item.Id" alt="@item.Name">
+        <div class="card-body">
+            <h5 class="card-title">@item.Name</h5>
+            <p class="card-text">$@item.Price</p>
+            
+            <p class="card-text">@item.Description.Substring(0, 60)</p>
+            <a href="#" class="btn btn-primary">Go somewhere</a>
+        </div>
+    </div>
+    }
+</div>
+
