@@ -32,7 +32,34 @@ namespace SimpleCrud.Controllers
             
             return View("Index", products.SearchProductByName(searchTerm));
         }
+
+
+        //Return a view with one product
+        public IActionResult ShowDetails(int id)
+        {
+            ProductsDataAccessObject product = new ProductsDataAccessObject();
+            
+            return View(product.GetProductDetails(id));
+        }
       
 
+
+        //Show the form to edit
+        public IActionResult Edit(int id)
+        {
+
+            ProductsDataAccessObject product = new ProductsDataAccessObject();
+
+            return View("ShowEditForm",product.GetProductDetails(id));
+        }
+
+
+        //Now Edit
+        public IActionResult ProcessEdit(ProductModel product)
+        {
+            ProductsDataAccessObject products = new ProductsDataAccessObject();
+            products.Update(product);
+            return View("Index", products.GetAllProducts());
+        }
     }
 }

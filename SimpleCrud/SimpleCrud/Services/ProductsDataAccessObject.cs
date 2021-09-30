@@ -92,5 +92,38 @@ namespace SimpleCrud.Services
             return products;
 
         }
+
+        //Get one product from the database. Product details
+        public ProductModel GetProductDetails(int id)
+        {
+            ProductModel product = null;
+
+            //Make a sql Statement
+            string sqlStatement = "select * from Products where product_id = @Id";
+
+            //Make a connection
+            using(SqlConnection connection = new SqlConnection(connectionString))
+            {
+                //Make command 
+                SqlCommand command = new SqlCommand(sqlStatement, connection);
+                command.Parameters.AddWithValue("@Id", id);
+
+                try
+                {
+                    connection.Open();
+                    SqlDataReader reader = command.ExecuteReader();
+                    while (reader.Read())
+                    {
+                        product = new ProductModel { Id = (int)reader[0], Name = (string)reader[1], Price = (decimal)reader[2], Description = (string)reader[3] };
+                    }
+
+                }catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+            return product;
+        }
     }
 }
