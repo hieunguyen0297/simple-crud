@@ -61,5 +61,16 @@ namespace SimpleCrud.Controllers
             products.Update(product);
             return View("Index", products.GetAllProducts());
         }
+
+
+        //Delete product
+        
+        public IActionResult Delete(int id)
+        {
+            ProductsDataAccessObject products = new ProductsDataAccessObject();
+           
+            products.Delete(id);
+            return View("Index", products.GetAllProducts());
+        }
     }
 }

@@ -242,3 +242,4 @@ C:\Users\HIEU NGUYEN\source\repos\simple-crud\SimpleCrud\SimpleCrud\bin\Debug\ne
 C:\Users\HIEU NGUYEN\source\repos\simple-crud\SimpleCrud\SimpleCrud\obj\Debug\net5.0\Razor\Views\Product\SearchForm.cshtml.g.cs
 C:\Users\HIEU NGUYEN\source\repos\simple-crud\SimpleCrud\SimpleCrud\obj\Debug\net5.0\Razor\Views\Shared\_Navbar.cshtml.g.cs
 C:\Users\HIEU NGUYEN\source\repos\simple-crud\SimpleCrud\SimpleCrud\obj\Debug\net5.0\Razor\Views\Product\ShowDetails.cshtml.g.cs
+C:\Users\HIEU NGUYEN\source\repos\simple-crud\SimpleCrud\SimpleCrud\obj\Debug\net5.0\Razor\Views\Product\ShowEditForm.cshtml.g.cs

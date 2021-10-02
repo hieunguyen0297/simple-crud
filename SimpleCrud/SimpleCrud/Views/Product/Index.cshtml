@@ -18,7 +18,9 @@
             <p class="card-text">$@item.Price</p>
             
             <p class="card-text">@item.Description.Substring(0, 60)</p>
-            <a href="#" class="btn btn-primary">Go somewhere</a>
+            <a href="/product/showdetails/@item.Id" class="btn btn-primary">Details</a>
+            <a href="/product/edit/@item.Id" class="btn btn-warning">Edit</a>
+            <a href="/product/delete/@item.Id" class="btn btn-danger">Delete</a>
         </div>
     </div>
     }

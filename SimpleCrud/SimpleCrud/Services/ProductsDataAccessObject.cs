@@ -125,5 +125,75 @@ namespace SimpleCrud.Services
 
             return product;
         }
+
+
+        //Update a product
+        public int Update(ProductModel product)
+        {
+            int newIdNumber = -1;
+            string sqlStatement = "update products SET product_name = @Name, price = @Price, description = @Des where product_id = @Id";
+
+            //Make a connection
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                //Make command 
+                SqlCommand command = new SqlCommand(sqlStatement, connection);
+                command.Parameters.AddWithValue("@Name", product.Name);
+                command.Parameters.AddWithValue("@Price", product.Price);
+                command.Parameters.AddWithValue("@Des", product.Description);
+                command.Parameters.AddWithValue("@Id", product.Id);
+
+                try
+                {
+                    connection.Open();
+                    newIdNumber = Convert.ToInt32( command.ExecuteScalar());
+                    
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+            }
+
+            return newIdNumber;
+        }
+
+        //Delete a product
+        //We can use the ProductModel as parameter, and then delete using product.Id
+        //ALWAYS RETURN SOMETHING
+        //Here, we return the id of the product that was deleted
+        //Use command.ExecuteScalar()
+        //Alternative to Convert into int32 -- (int32) command.ExecuteScalar()
+        public int Delete(int id)
+        {
+            int newIdNumber = -1;
+            string sqlStatement = "delete from products where product_id = @Id";
+
+            //Make a connection
+            using (SqlConnection connection = new SqlConnection(connectionString))
+            {
+                //Make command 
+                SqlCommand command = new SqlCommand(sqlStatement, connection);
+             
+                command.Parameters.AddWithValue("@Id", id);
+
+                try
+                {
+                    connection.Open();
+                    newIdNumber = Convert.ToInt32(command.ExecuteScalar());
+                   
+
+                }
+                catch (Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+
+            }
+
+            return newIdNumber;
+        }
     }
 }
