@@ -72,5 +72,21 @@ namespace SimpleCrud.Controllers
             products.Delete(id);
             return View("Index", products.GetAllProducts());
         }
+
+        //Show form to create
+        public IActionResult Create()
+        {
+            return View();
+        }
+
+
+        //Create product
+      
+        public IActionResult ProcessCreate(ProductModel product)
+        {
+            ProductsDataAccessObject products = new ProductsDataAccessObject();
+            products.CreateProduct(product);
+            return View("Index", products.GetAllProducts());
+        }
     }
 }

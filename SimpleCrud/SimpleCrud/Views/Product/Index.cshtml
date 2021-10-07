@@ -1,14 +1,14 @@
 ﻿@model IEnumerable<SimpleCrud.Models.ProductModel>
 
 <p>
-    <a asp-action="Create" class="text-light">Create New</a>
+    <a href="/product/create" class="text-light">Create New</a>
 </p>
 
 <div class="container d-flex flex-wrap">
     @foreach(var item in Model)
     {
-        var fullName = item.Name;
-        var firstWord = fullName.IndexOf(" ") > 0 ? fullName.Substring(0, fullName.IndexOf(" ")) : fullName;
+        string fullName = item.Name;
+        string firstWord = fullName.IndexOf(" ") > 0 ? fullName.Substring(0, fullName.IndexOf(" ")) : fullName;
 
         //get substring of Description
     <div class="card m-3 border-0 bg-light" style="width: 18rem;">

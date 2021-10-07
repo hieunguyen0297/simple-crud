@@ -195,5 +195,39 @@ namespace SimpleCrud.Services
 
             return newIdNumber;
         }
+
+
+        //Create product
+        public int CreateProduct(ProductModel product)
+        {
+            //return an int
+            int newProductId = -1;
+
+            //Make a sql statement
+            string sqlStatement = "Insert into products (product_name, price, description) values  (@Name, @Price, @Description)";
+
+            //Making a connection
+            using(SqlConnection connection = new SqlConnection(connectionString))
+            {
+                //Make a sql command 
+                SqlCommand command = new SqlCommand(sqlStatement, connection);
+                command.Parameters.AddWithValue("@Name", product.Name);
+                command.Parameters.AddWithValue("@Price", product.Price);
+                command.Parameters.AddWithValue("@Description", product.Description);
+
+                try
+                {
+                    connection.Open();
+                    newProductId = Convert.ToInt32(command.ExecuteScalar());
+
+                }catch(Exception e)
+                {
+                    Console.WriteLine(e.Message);
+                }
+            }
+
+
+            return newProductId;
+        }
     }
 }
