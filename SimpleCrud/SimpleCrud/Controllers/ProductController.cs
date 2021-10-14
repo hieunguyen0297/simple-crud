@@ -43,6 +43,13 @@ namespace SimpleCrud.Controllers
         }
       
 
+        public IActionResult ShowOneProductJson(int id)
+        {
+            ProductsDataAccessObject product = new ProductsDataAccessObject();
+
+            return Json(product.GetProductDetails(id));
+        }
+
 
         //Show the form to edit
         public IActionResult Edit(int id)
