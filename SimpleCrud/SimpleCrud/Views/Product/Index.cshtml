@@ -4,74 +4,79 @@
     <a href="/product/create" class="text-light">Create New</a>
 </p>
 
-<div class="container d-flex flex-wrap">
-    @foreach (var item in Model)
-    {
-        string fullName = item.Name;
-        string firstWord = fullName.IndexOf(" ") > 0 ? fullName.Substring(0, fullName.IndexOf(" ")) : fullName;
+<div>
 
-        //get substring of Description
-        <div class="card m-3 border-0 bg-light partial-div" style="width: 18rem;">
-            <img class="card-img-top" src="https://loremflickr.com/320/250/@firstWord?lock=@item.Id" alt="@item.Name">
-            <div class="card-body">
-                <h5 class="card-title">@item.Name</h5>
-                <p class="card-text">$@item.Price</p>
 
-                <p class="card-text">@item.Description.Substring(0, 60)</p>
-                <a href="/product/showdetails/@item.Id" class="btn btn-primary">Details</a>
-                <a href="/product/edit/@item.Id" class="btn btn-warning">Edit</a>
-                <a href="/product/delete/@item.Id" class="btn btn-danger">Delete</a>
-                <!-- Button trigger modal -->
-                <button value="@item.Id" type="button" class="btn btn-primary mt-1 edit-product-button" data-toggle="modal" data-target="#editModal">
-                    Edit Modal
-                </button>
+    <div class="container d-flex flex-wrap">
+        @foreach (var item in Model)
+        {
+            string fullName = item.Name;
+            string firstWord = fullName.IndexOf(" ") > 0 ? fullName.Substring(0, fullName.IndexOf(" ")) : fullName;
 
+            //get substring of Description
+            <div class="card m-3 border-0 bg-light partial-div" style="width: 18rem;">
+                <img class="card-img-top" src="https://loremflickr.com/320/250/@firstWord?lock=@item.Id" alt="@item.Name">
+                <div class="card-body">
+                    <h5 class="card-title">@item.Name</h5>
+                    <p class="card-text">$@item.Price</p>
+
+                    <p class="card-text">@item.Description.Substring(0, 60)</p>
+                    <a href="/product/showdetails/@item.Id" class="btn btn-primary">Details</a>
+                    <a href="/product/edit/@item.Id" class="btn btn-warning">Edit</a>
+                    <a href="/product/delete/@item.Id" class="btn btn-danger">Delete</a>
+                    <!-- Button trigger modal -->
+                    <button value="@item.Id" type="button" class="btn btn-primary mt-1 edit-product-button" data-toggle="modal" data-target="#editModal">
+                        Edit Modal
+                    </button>
+
+                </div>
             </div>
-        </div>
-    }
-</div>
+        }
+    </div>
 
 
 
 
-<!-- Modal -->
-<div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-
-                <div class="form-group">
-                    <label for="Id" class="control-label">ID</label>
-                    <input id="modal-input-id" for="Id" class="form-control" />
-                    
+    <!-- Modal -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Product</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
                 </div>
-                <div class="form-group">
-                    <label for="Name" class="control-label">Name</label>
-                    <input id="modal-input-name" for="Name" class="form-control" />
-                    
-                </div>
-                <div class="form-group">
-                    <label for="Price" class="control-label">Price</label>
-                    <input id="modal-input-price" for="Price" class="form-control" />
-                    
-                </div>
-                <div class="form-group">
-                    <label for="Description" class="control-label">Description</label>
-                    <input id="modal-input-description" for="Description" class="form-control" />
-                   
-                </div>
+                <div class="modal-body">
 
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary save-button" data-dismiss="modal">Save changes</button>
+                    <div class="form-group">
+                        <label for="Id" class="control-label">ID</label>
+                        <input id="modal-input-id" for="Id" class="form-control" />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Name" class="control-label">Name</label>
+                        <input id="modal-input-name" for="Name" class="form-control" />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Price" class="control-label">Price</label>
+                        <input id="modal-input-price" for="Price" class="form-control" />
+
+                    </div>
+                    <div class="form-group">
+                        <label for="Description" class="control-label">Description</label>
+                        <input id="modal-input-description" for="Description" class="form-control" />
+
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary save-button" data-dismiss="modal">Save changes</button>
+                </div>
             </div>
         </div>
     </div>
+
 </div>

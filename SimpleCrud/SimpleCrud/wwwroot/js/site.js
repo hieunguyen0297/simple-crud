@@ -40,7 +40,8 @@ $(document).ready(function () {
             url: "/product/ProcessEdit",
             success: function (data) {
                 //this is where partial update is useful
-                $(".partial-div").html("");
+                //below is not partial update - it is updating the whole index page
+                $(".update-whole-div").html(data);
             }
         })
 
