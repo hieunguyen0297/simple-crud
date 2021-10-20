@@ -9,7 +9,7 @@ using SimpleCrud.Services;
 namespace SimpleCrud.Controllers
 {
     [ApiController]
-    [Route("/api")]
+    [Route("api/")]
     public class ProductControllerAPI : ControllerBase
     {
         ProductsDataAccessObject products;
@@ -18,22 +18,18 @@ namespace SimpleCrud.Controllers
             products = new ProductsDataAccessObject();
         }
 
+        //return a list of products
         [HttpGet]
         public ActionResult <IEnumerable<ProductModel>> Index()
         {
             return products.GetAllProducts();
         }
         
-        /*
-        //Make a search form
-        public IActionResult SearchForm()
-        {
-            return View();
-        }
-        */
+       
 
         //This method will do the search form
         //The searchTerm will correspond to the name= "searchTerm" in the SearchFrom.cshtml
+        //CAN NOT use "/searchproducts"
         [HttpGet("searchproducts/{searchTerm}")]
         public ActionResult <IEnumerable<ProductModel>> SearchResult(string searchTerm)
         {
@@ -42,68 +38,52 @@ namespace SimpleCrud.Controllers
 
          
         
-        /*
-        //Return a view with one product
-        public IActionResult ShowDetails(int id)
-        {
-            ProductsDataAccessObject product = new ProductsDataAccessObject();
-            
-            return View(product.GetProductDetails(id));
-        }
-      
-
-        public IActionResult ShowOneProductJson(int id)
-        {
-            ProductsDataAccessObject product = new ProductsDataAccessObject();
-
-            return Json(product.GetProductDetails(id));
-        }
-
-
-        //Show the form to edit
-        public IActionResult Edit(int id)
-        {
-
-            ProductsDataAccessObject product = new ProductsDataAccessObject();
-
-            return View("ShowEditForm",product.GetProductDetails(id));
-        }
-
-
-        //Now Edit
-        public IActionResult ProcessEdit(ProductModel product)
-        {
-            ProductsDataAccessObject products = new ProductsDataAccessObject();
-            products.Update(product);
-            return View("Index", products.GetAllProducts());
-        }
-
-
-        //Delete product
         
-        public IActionResult Delete(int id)
+        //Return a view with one product
+        //Ienumerable return an array // remove that to return a product
+        //params id or ID does not matter
+        [HttpGet("showoneproduct/{id}")]
+        public ActionResult <ProductModel> ShowOneProduct(int id)
         {
-            ProductsDataAccessObject products = new ProductsDataAccessObject();
-           
+            
+            return products.GetProductDetails(id);
+        }
+        
+        
+        //Insert a product
+        //Expecting a product in JSON format in the body of the request
+       
+        [HttpPost("insertproduct")]
+        public ActionResult <int> InsertProduct(ProductModel product)
+        {
+            int newID = products.CreateProduct(product);
+            return newID;
+        }
+
+
+       
+        // "insert/{id}" => the id is corresponding to the int id in the method's parameter/
+       
+        //Now Edit ]
+        //Edit a product has to take in a product model
+        [HttpPut("edit")]
+        public ActionResult <string> ProcessEdit(ProductModel product)
+        {
+            products.Update(product);
+            return $"Edit product with the ID of {product.Id} was successfully";
+        }
+       
+
+         
+        //Delete a product
+        
+        [HttpDelete("delete/{id}")]
+        public ActionResult <string> Delete(int id)
+        {
             products.Delete(id);
-            return View("Index", products.GetAllProducts());
+            return $"Product with ID of {id} was deleted successfull";
         }
 
-        //Show form to create
-        public IActionResult Create()
-        {
-            return View();
-        }
-
-
-        //Create product
-      
-        public IActionResult ProcessCreate(ProductModel product)
-        {
-            ProductsDataAccessObject products = new ProductsDataAccessObject();
-            products.CreateProduct(product);
-            return View("Index", products.GetAllProducts());
-        }
-        */
+        
     }
 }
