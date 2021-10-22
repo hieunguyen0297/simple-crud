@@ -20,9 +20,19 @@ namespace SimpleCrud.Controllers
 
         //return a list of products
         [HttpGet]
-        public ActionResult <IEnumerable<ProductModel>> Index()
+        public ActionResult <List<ProductModelDTO>> Index()
         {
-            return products.GetAllProducts();
+            //get all products from the ProductModel
+            List<ProductModel> allProduct = products.GetAllProducts();
+
+            //make a list of new product using ProductModelDTO
+            List<ProductModelDTO> productsDTO = new List<ProductModelDTO>();
+            foreach (ProductModel product in allProduct)
+            {
+                productsDTO.Add(new ProductModelDTO(product));
+            }
+
+            return productsDTO;
         }
         
        
@@ -31,9 +41,22 @@ namespace SimpleCrud.Controllers
         //The searchTerm will correspond to the name= "searchTerm" in the SearchFrom.cshtml
         //CAN NOT use "/searchproducts"
         [HttpGet("searchproducts/{searchTerm}")]
-        public ActionResult <IEnumerable<ProductModel>> SearchResult(string searchTerm)
+
+        //cant be List<T> or IEnumerable<T>
+        public ActionResult <List<ProductModelDTO>> SearchResult(string searchTerm)
         {
-            return products.SearchProductByName(searchTerm);
+            //get all products from the ProductModel
+            List<ProductModel> matchProducts = products.SearchProductByName(searchTerm);
+
+            //make a list of new product using ProductModelDTO
+            List<ProductModelDTO> matchProductsDTO = new List<ProductModelDTO>();
+
+            foreach (ProductModel product in matchProducts)
+            {
+                matchProductsDTO.Add(new ProductModelDTO(product));
+            }
+
+            return matchProductsDTO;
         }
 
          
@@ -43,10 +66,15 @@ namespace SimpleCrud.Controllers
         //Ienumerable return an array // remove that to return a product
         //params id or ID does not matter
         [HttpGet("showoneproduct/{id}")]
-        public ActionResult <ProductModel> ShowOneProduct(int id)
+        public ActionResult <ProductModelDTO> ShowOneProduct(int id)
         {
-            
-            return products.GetProductDetails(id);
+            //find the product by id
+            ProductModel product = products.GetProductDetails(id);
+
+            //if use product model, just passs in the model
+            ProductModelDTO productDTO = new ProductModelDTO(product.Id, product.Name, product.Price, product.Description);
+
+            return productDTO;
         }
         
         
