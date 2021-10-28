@@ -42,7 +42,7 @@ namespace SimpleCrud.Controllers
         //CAN NOT use "/searchproducts"
         [HttpGet("searchproducts/{searchTerm}")]
 
-        //cant be List<T> or IEnumerable<T>
+        //can be List<T> or IEnumerable<T>
         public ActionResult <List<ProductModelDTO>> SearchResult(string searchTerm)
         {
             //get all products from the ProductModel
