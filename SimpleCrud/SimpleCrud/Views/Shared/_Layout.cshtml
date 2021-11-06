@@ -8,14 +8,17 @@
     <link rel="stylesheet" href="~/css/site.css" />
 </head>
 <body>
-    <header >
-        @Html.Partial("_Navbar.cshtml")
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
+    <div style="display: flex;">
+        <header style="width: 10%;">
+            @Html.Partial("_Navbar.cshtml")
+        </header>
+        <div class="container">
+            <main role="main" class="pb-3">
+                @RenderBody()
+            </main>
+        </div>
     </div>
+    
 
     <footer class="border-top footer text-muted">
         <div class="container">
